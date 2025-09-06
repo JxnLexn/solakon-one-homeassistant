@@ -1,0 +1,13 @@
+{
+  "domain": "solakon_one",
+  "name": "Solakon ONE",
+  "codeowners": ["@danielehrhardt"],
+  "config_flow": true,
+  "dependencies": ["modbus"],
+  "documentation": "https://github.com/danielehrhardt/solakon-one-home-assistant",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/danielehrhardt/solakon-one-home-assistant/issues",
+  "requirements": [],
+  "version": "1.0.0"
+}

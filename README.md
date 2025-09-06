@@ -1,0 +1,169 @@
+# Solakon ONE Home Assistant Integration
+
+A complete Home Assistant integration for Solakon ONE devices using Modbus TCP communication.
+
+## Features
+
+- Real-time monitoring of all inverter parameters
+- PV string monitoring (voltage, current, power)
+- Battery management (SOC, SOH, power, temperature)
+- Grid import/export tracking
+- Energy statistics (daily, monthly, yearly)
+- Temperature monitoring
+- Alarm and status monitoring
+- Configurable update intervals
+- Full UI configuration support
+
+## Monitored Sensors
+
+### Power Sensors
+- PV Power (total from all strings)
+- Active Power
+- Reactive Power
+- Load Power
+- Battery Power
+
+### Voltage & Current
+- PV1/PV2/PV3/PV4 Voltage & Current
+- Grid Phase Voltages (R/S/T)
+- Battery Voltage & Current
+- Load Voltage & Current
+
+### Energy Statistics
+- Total Energy Generated
+- Daily Energy Generation
+- Monthly/Yearly Generation
+- Battery Charge/Discharge Today
+- Grid Import/Export (Today & Total)
+
+### Battery Information
+- State of Charge (SOC)
+- State of Health (SOH)
+- Battery Temperature
+- Battery Power
+
+### System Information
+- Internal Temperature
+- Heatsink Temperature
+- Power Factor
+- Grid Frequency
+- System Status
+- Alarms
+
+## Installation HACS Installation (Recommended)
+
+1. Open HACS in Home Assistant
+2. Click on "Integrations"
+3. Click the three dots menu → "Custom repositories"
+4. Add repository URL: `https://github.com/solakon-de/solakon-one-homeassistant`
+5. Select category: "Integration"
+6. Click "Add"
+7. Search for "Solakon ONE" and install
+8. Restart Home Assistant
+9. Add the integration via Settings → Devices & Services
+
+## Configuration
+
+### Via UI (Recommended)
+
+1. Go to Settings → Devices & Services
+2. Click "Add Integration"
+3. Search for "Solakon ONE"
+4. Enter configuration:
+   - **Host**: IP address of your Solakon ONE device
+   - **Port**: Modbus TCP port (default: 502)
+   - **Device Name**: Friendly name for your device
+   - **Modbus Slave ID**: Usually 1 (range: 1-247)
+   - **Update Interval**: How often to poll (10-300 seconds)
+
+### Network Requirements
+
+- Ensure your Solakon ONE device is connected to your network
+- Modbus TCP must be enabled on the device
+- Default Modbus TCP port is 502
+- Device must be accessible from Home Assistant
+
+## Troubleshooting
+
+### Connection Issues
+
+1. Verify network connectivity:
+   ```bash
+   ping <device-ip>
+   ```
+
+2. Test Modbus connection:
+   ```bash
+   telnet <device-ip> 502
+   ```
+
+3. Check Home Assistant logs:
+   ```
+   Settings → System → Logs → Search for "solakon"
+   ```
+
+### Common Issues
+
+- **Cannot connect**: Verify IP address and port are correct
+- **No data**: Check Modbus slave ID (usually 1)
+- **Intermittent data**: Increase update interval if network is slow
+- **Missing sensors**: Some sensors only appear if hardware is present (e.g., battery sensors)
+
+## Energy Dashboard Integration
+
+To add Solakon ONE data to your Energy Dashboard:
+
+1. Go to Settings → Dashboards → Energy
+2. Configure:
+   - **Solar production**: Select "Solakon ONE Daily Energy"
+   - **Grid consumption**: Select "Solakon ONE Grid Import Today"
+   - **Return to grid**: Select "Solakon ONE Grid Export Today"
+   - **Battery**: Select battery charge/discharge sensors
+
+## Automation Examples
+
+### Low Battery Alert
+```yaml
+automation:
+  - alias: "Low Battery Alert"
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.solakon_one_battery_soc
+        below: 20
+    action:
+      - service: notify.mobile_app
+        data:
+          message: "Battery SOC is below 20%!"
+```
+
+### Export Limit Control
+```yaml
+automation:
+  - alias: "Limit Export During Peak"
+    trigger:
+      - platform: time
+        at: "17:00:00"
+    action:
+      - service: solakon_one.set_work_mode
+        data:
+          mode: "self_use"
+```
+
+## Services
+
+The integration provides several services:
+
+- `solakon_one.refresh_data`: Manually refresh all sensor data
+- `solakon_one.set_battery_charge_limit`: Set max battery charge %
+- `solakon_one.set_battery_discharge_limit`: Set min battery discharge %
+- `solakon_one.set_work_mode`: Change inverter operation mode
+- `solakon_one.set_time_of_use`: Configure TOU schedules
+
+## Support
+
+For issues or questions:
+- Report issues on [GitHub](https://github.com/solakon-de/solakon-one-homeassistant/issues)
+
+## License
+
+This integration is provided as-is under the MIT License.
