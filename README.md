@@ -1,6 +1,10 @@
 # Solakon ONE Home Assistant Integration
 
-A complete Home Assistant integration for Solakon ONE devices using Modbus TCP communication.
+A complete Home Assistant custom integration for Solakon ONE devices using Modbus TCP communication.
+
+> ⚠️ **IMPORTANT**: This is a Home Assistant **Integration**, not an Add-on. 
+> - Do NOT add this as an Add-on repository
+> - Install it through HACS as an Integration (see instructions below)
 
 ## Features
 
@@ -50,17 +54,34 @@ A complete Home Assistant integration for Solakon ONE devices using Modbus TCP c
 - System Status
 - Alarms
 
-## Installation HACS Installation (Recommended)
+## Installation
 
-1. Open HACS in Home Assistant
-2. Click on "Integrations"
-3. Click the three dots menu → "Custom repositories"
-4. Add repository URL: `https://github.com/solakon-de/solakon-one-homeassistant`
-5. Select category: "Integration"
-6. Click "Add"
-7. Search for "Solakon ONE" and install
-8. Restart Home Assistant
-9. Add the integration via Settings → Devices & Services
+### Prerequisites
+- Home Assistant 2024.1.0 or newer
+- HACS (Home Assistant Community Store) installed
+- Your Solakon ONE device connected to your network with Modbus TCP enabled
+
+### HACS Installation (Recommended)
+
+1. Open HACS in your Home Assistant instance
+2. Click on **"Integrations"** (NOT Add-ons!)
+3. Click the **three dots menu** in the top right → **"Custom repositories"**
+4. Add this repository URL: `https://github.com/solakon-de/solakon-one-homeassistant`
+5. Select category: **"Integration"** (⚠️ NOT "Add-on"!)
+6. Click **"Add"**
+7. Close the custom repositories dialog
+8. Click **"+ Explore & Download Repositories"**
+9. Search for **"Solakon ONE"** and install it
+10. **Restart Home Assistant**
+11. Go to **Settings → Devices & Services**
+12. Click **"+ Add Integration"**
+13. Search for **"Solakon ONE"** and configure it
+
+### Manual Installation
+
+1. Copy the `custom_components/solakon_one` folder to your Home Assistant's `custom_components` directory
+2. Restart Home Assistant
+3. Add the integration via Settings → Devices & Services
 
 ## Configuration
 
