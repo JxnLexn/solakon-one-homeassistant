@@ -115,6 +115,20 @@ SENSOR_DEFINITIONS = {
         "unit": "V",
         "icon": "mdi:flash",
     },
+    "pv3_voltage": {
+        "name": "PV3 Voltage",
+        "device_class": "voltage",
+        "state_class": "measurement",
+        "unit": "V",
+        "icon": "mdi:flash",
+    },
+    "pv4_voltage": {
+        "name": "PV4 Voltage",
+        "device_class": "voltage",
+        "state_class": "measurement",
+        "unit": "V",
+        "icon": "mdi:flash",
+    },
     "grid_r_voltage": {
         "name": "Grid R Voltage",
         "device_class": "voltage",
@@ -140,6 +154,20 @@ SENSOR_DEFINITIONS = {
     },
     "pv2_current": {
         "name": "PV2 Current",
+        "device_class": "current",
+        "state_class": "measurement",
+        "unit": "A",
+        "icon": "mdi:current-dc",
+    },
+    "pv3_current": {
+        "name": "PV3 Current",
+        "device_class": "current",
+        "state_class": "measurement",
+        "unit": "A",
+        "icon": "mdi:current-dc",
+    },
+    "pv4_current": {
+        "name": "PV4 Current",
         "device_class": "current",
         "state_class": "measurement",
         "unit": "A",
