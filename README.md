@@ -41,10 +41,10 @@ A complete Home Assistant custom integration for Solakon ONE devices using Modbu
 - Grid Import/Export (Today & Total)
 
 ### Battery Information
-- State of Charge (SOC)
-- State of Health (SOH)
-- Battery Temperature
 - Battery Power
+- Battery Voltage
+- Battery Current
+- **Note:** Battery SOC (State of Charge) and SOH (State of Health) sensors will be available in a future update
 
 ### System Information
 - Internal Temperature
@@ -143,42 +143,30 @@ To add Solakon ONE data to your Energy Dashboard:
 
 ## Automation Examples
 
-### Low Battery Alert
+### Battery Power Monitoring
 ```yaml
 automation:
-  - alias: "Low Battery Alert"
+  - alias: "Battery Discharging Alert"
     trigger:
       - platform: numeric_state
-        entity_id: sensor.solakon_one_battery_soc
-        below: 20
+        entity_id: sensor.solakon_one_battery_power
+        below: -5000  # Alert when discharging more than 5kW
     action:
       - service: notify.mobile_app
         data:
-          message: "Battery SOC is below 20%!"
+          message: "Battery is discharging at high rate!"
 ```
 
-### Export Limit Control
-```yaml
-automation:
-  - alias: "Limit Export During Peak"
-    trigger:
-      - platform: time
-        at: "17:00:00"
-    action:
-      - service: solakon_one.set_work_mode
-        data:
-          mode: "self_use"
-```
 
 ## Services
 
-The integration provides several services:
+**Note:** Service functionality is currently under development and will be available in a future update. The following services are planned:
 
-- `solakon_one.refresh_data`: Manually refresh all sensor data
-- `solakon_one.set_battery_charge_limit`: Set max battery charge %
-- `solakon_one.set_battery_discharge_limit`: Set min battery discharge %
-- `solakon_one.set_work_mode`: Change inverter operation mode
-- `solakon_one.set_time_of_use`: Configure TOU schedules
+- `solakon_one.refresh_data`: Manually refresh all sensor data (coming soon)
+- `solakon_one.set_battery_charge_limit`: Set max battery charge % (coming soon)
+- `solakon_one.set_battery_discharge_limit`: Set min battery discharge % (coming soon)
+- `solakon_one.set_work_mode`: Change inverter operation mode (coming soon)
+- `solakon_one.set_time_of_use`: Configure TOU schedules (coming soon)
 
 ## Support
 
