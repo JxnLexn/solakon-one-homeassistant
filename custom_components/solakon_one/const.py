@@ -1,8 +1,8 @@
 """Constants for the Solakon ONE integration."""
 from typing import Final
 
-DOMAIN: Final = "solakon_one"
-DEFAULT_NAME: Final = "Solakon ONE"
+DOMAIN: Final = "solakon_one_extended"
+DEFAULT_NAME: Final = "Solakon ONE Extended"
 DEFAULT_PORT: Final = 502
 DEFAULT_SLAVE_ID: Final = 1
 DEFAULT_SCAN_INTERVAL: Final = 30
