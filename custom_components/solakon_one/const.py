@@ -41,6 +41,9 @@ REGISTERS = {
     "pv4_voltage": {"address": 39076, "count": 1, "type": "i16", "scale": 10, "unit": "V"},
     "pv4_current": {"address": 39077, "count": 1, "type": "i16", "scale": 100, "unit": "A"},
     "total_pv_power": {"address": 39118, "count": 2, "type": "i32", "scale": 1000, "unit": "kW"},
+    #selfmade additions for pv stats
+    "pv_total": {"address": 39601, "count": 2, "type": "u32", "scale": 100, "unit": "kWh"},
+    "pv_daily": {"address": 39603, "count": 2, "type": "u32", "scale": 100, "unit": "kWh"},
     
     # Grid Information
     "grid_r_voltage": {"address": 39123, "count": 1, "type": "i16", "scale": 10, "unit": "V"},
@@ -60,13 +63,22 @@ REGISTERS = {
     # Energy Statistics
     "cumulative_generation": {"address": 39149, "count": 2, "type": "u32", "scale": 100, "unit": "kWh"},
     "daily_generation": {"address": 39151, "count": 2, "type": "u32", "scale": 100, "unit": "kWh"},
+    # selfmade additions for energy stats
+    "output_total": {"address": 39621, "count": 2, "type": "u32", "scale": 100, "unit": "kWh"},
+    "output_daily": {"address": 39623, "count": 2, "type": "u32", "scale": 100, "unit": "kWh"},
     
     # Battery Information
     "battery1_voltage": {"address": 39227, "count": 1, "type": "i16", "scale": 10, "unit": "V"},
     "battery1_current": {"address": 39228, "count": 2, "type": "i32", "scale": 1000, "unit": "A"},
     "battery1_power": {"address": 39230, "count": 2, "type": "i32", "scale": 1, "unit": "W"},
     "battery_combined_power": {"address": 39237, "count": 2, "type": "i32", "scale": 1, "unit": "W"},
-    "battery_state_of_charge": {"address": 39424, "count": 1, "type": "i16", "unit": "%"},
+    # selfmade additions for battery stats
+    "battery_charging_total": {"address": 39605, "count": 2, "type": "u32", "scale": 100, "unit": "kWh"},
+    "battery_charging_daily": {"address": 39607, "count": 2, "type": "u32", "scale": 100, "unit": "kWh"},
+    "battery_discharging_total": {"address": 39609, "count": 2, "type": "u32", "scale": 100, "unit": "kWh"},
+    "battery_discharging_daily": {"address": 39611, "count": 2, "type": "u32", "scale": 100, "unit": "kWh"},
+    "battery_state_of_charge": {"address": 39424, "count": 1, "type": "i16", "scale": 1, "unit": "%"},
+    
 }
 
 # Sensor definitions for Home Assistant
@@ -229,5 +241,63 @@ SENSOR_DEFINITIONS = {
         "state_class": "measurement",
         "unit": "Hz",
         "icon": "mdi:sine-wave",
+    },
+
+    # Selfmade additions
+    "pv_total": {
+        "name": "PV Total Energy",
+        "device_class": "energy",
+        "state_class": "total_increasing",
+        "unit": "kWh",
+        "icon": "mdi:solar-panel",
+    },
+    "pv_daily": {
+        "name": "PV Daily Energy",
+        "device_class": "energy",
+        "state_class": "total_increasing",
+        "unit": "kWh",
+        "icon": "mdi:solar-panel",
+    },
+    "output_total": {
+        "name": "Output Total Energy",
+        "device_class": "energy",
+        "state_class": "total_increasing",
+        "unit": "kWh",
+        "icon": "mdi:transmission-tower-export",
+    },
+    "output_daily": {
+        "name": "Output Daily Energy",
+        "device_class": "energy",
+        "state_class": "total_increasing",
+        "unit": "kWh",
+        "icon": "mdi:transmission-tower-export",
+    },
+    "battery_charging_total": {
+        "name": "Battery Charging Total Energy",
+        "device_class": "energy",
+        "state_class": "total_increasing",
+        "unit": "kWh",
+        "icon": "mdi:battery-positive",
+    },
+    "battery_charging_daily": {
+        "name": "Battery Charging Daily Energy",
+        "device_class": "energy",
+        "state_class": "total_increasing",
+        "unit": "kWh",
+        "icon": "mdi:battery-positive",
+    },
+    "battery_discharging_total": {
+        "name": "Battery Discharging Total Energy",
+        "device_class": "energy",
+        "state_class": "total_increasing",
+        "unit": "kWh",
+        "icon": "mdi:battery-negative",
+    },
+    "battery_discharging_daily": {
+        "name": "Battery Discharging Daily Energy",
+        "device_class": "energy",
+        "state_class": "total_increasing",
+        "unit": "kWh",
+        "icon": "mdi:battery-negative",
     },
 }
