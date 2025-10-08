@@ -1,13 +1,13 @@
 {
-  "domain": "solakon_one",
-  "name": "Solakon ONE",
-  "codeowners": ["@solakon-de"],
+  "domain": "solakon_one_extended",
+  "name": "Solakon ONE Extended",
+  "codeowners": ["@solakon-de","@jxnlexn"],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://github.com/solakon-de/solakon-one-homeassistant",
+  "documentation": "https://github.com/jxnlexn/solakon-one-homeassistant",
   "integration_type": "device",
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/solakon-de/solakon-one-homeassistant/issues",
+  "issue_tracker": "https://github.com/jxnlexn/solakon-one-homeassistant/issues",
   "requirements": ["pymodbus==3.11.2"],
   "version": "1.0.0"
 }
