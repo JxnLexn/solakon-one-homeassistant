@@ -2,6 +2,8 @@
 
 A complete Home Assistant custom integration for Solakon ONE devices using Modbus TCP communication.
 
+**Extended Version!**
+
 > ⚠️ **IMPORTANT**: This is a Home Assistant **Integration**, not an Add-on. 
 > - Do NOT add this as an Add-on repository
 > - Install it through HACS as an Integration (see instructions below)
@@ -17,6 +19,7 @@ A complete Home Assistant custom integration for Solakon ONE devices using Modbu
 - Alarm and status monitoring
 - Configurable update intervals
 - Full UI configuration support
+
 
 ## Monitored Sensors
 
