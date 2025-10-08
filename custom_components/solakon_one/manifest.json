@@ -1,7 +1,7 @@
 {
   "domain": "solakon_one_extended",
   "name": "Solakon ONE Extended",
-  "codeowners": ["@solakon-de","@jxnlexn"],
+  "codeowners": ["@jxnlexn","@solakon-de"],
   "config_flow": true,
   "dependencies": [],
   "documentation": "https://github.com/jxnlexn/solakon-one-homeassistant",
