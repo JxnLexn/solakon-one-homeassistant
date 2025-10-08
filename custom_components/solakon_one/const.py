@@ -66,6 +66,7 @@ REGISTERS = {
     "battery1_current": {"address": 39228, "count": 2, "type": "i32", "scale": 1000, "unit": "A"},
     "battery1_power": {"address": 39230, "count": 2, "type": "i32", "scale": 1, "unit": "W"},
     "battery_combined_power": {"address": 39237, "count": 2, "type": "i32", "scale": 1, "unit": "W"},
+    "battery_state_of_charge": {"address": 39238, "count": 1, "type": "u16", "unit": "%"},
 }
 
 # Sensor definitions for Home Assistant
@@ -143,7 +144,7 @@ SENSOR_DEFINITIONS = {
         "unit": "V",
         "icon": "mdi:battery",
     },
-    
+
     # Current sensors
     "pv1_current": {
         "name": "PV1 Current",
@@ -179,6 +180,15 @@ SENSOR_DEFINITIONS = {
         "state_class": "measurement",
         "unit": "A",
         "icon": "mdi:current-dc",
+    },
+
+    # Battery sensors
+    "battery_state_of_charge": {
+        "name": "Battery State of Charge",
+        "device_class": "battery",
+        "state_class": "measurement",
+        "unit": "%",
+        "icon": "mdi:battery-high",
     },
     
     # Energy sensors

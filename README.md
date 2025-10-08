@@ -30,7 +30,7 @@ A complete Home Assistant custom integration for Solakon ONE devices using Modbu
 ### Voltage & Current
 - PV1/PV2/PV3/PV4 Voltage & Current
 - Grid Phase Voltages (R/S/T)
-- Battery Voltage & Current
+- Battery Voltage, Current & SOC
 - Load Voltage & Current
 
 ### Energy Statistics
@@ -44,7 +44,8 @@ A complete Home Assistant custom integration for Solakon ONE devices using Modbu
 - Battery Power
 - Battery Voltage
 - Battery Current
-- **Note:** Battery SOC (State of Charge) and SOH (State of Health) sensors will be available in a future update
+- Battery State of Charge
+- **Note:** Battery SOH (State of Health) sensor will be available in a future update
 
 ### System Information
 - Internal Temperature
