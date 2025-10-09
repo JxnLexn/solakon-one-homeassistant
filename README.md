@@ -17,6 +17,7 @@ A complete Home Assistant custom integration for Solakon ONE devices using Modbu
 - Energy statistics (daily, monthly, yearly)
 - Temperature monitoring
 - Alarm and status monitoring
+- Remote control hooks (import power limit, remote enable)
 - Configurable update intervals
 - Full UI configuration support
 
@@ -49,6 +50,10 @@ A complete Home Assistant custom integration for Solakon ONE devices using Modbu
 - Battery Current
 - Battery State of Charge
 - **Note:** Battery SOH (State of Health) sensor will be available in a future update
+
+### Control Entities
+- Remote Control Enable (switch)
+- Import Power Limit (number)
 
 ### System Information
 - Internal Temperature
@@ -159,6 +164,35 @@ automation:
       - service: notify.mobile_app
         data:
           message: "Battery is discharging at high rate!"
+```
+
+### Import Power Limit
+```yaml
+automation:
+  - alias: "Limit grid import during peak hours"
+    trigger:
+      - platform: time
+        at: "17:00:00"
+    action:
+      - service: number.set_value
+        target:
+          entity_id: number.solakon_one_import_power_limit
+        data:
+          value: 5000  # Limit import to 5 kW
+```
+
+### Remote Control Enable Toggle
+```yaml
+automation:
+  - alias: "Enable remote control when automation active"
+    trigger:
+      - platform: state
+        entity_id: input_boolean.solakon_automation
+        to: "on"
+    action:
+      - service: switch.turn_on
+        target:
+          entity_id: switch.solakon_one_remote_control_enable
 ```
 
 

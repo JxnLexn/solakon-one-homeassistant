@@ -78,7 +78,11 @@ REGISTERS = {
     "battery_discharging_total": {"address": 39609, "count": 2, "type": "u32", "scale": 100, "unit": "kWh"},
     "battery_discharging_daily": {"address": 39611, "count": 2, "type": "u32", "scale": 100, "unit": "kWh"},
     "battery_state_of_charge": {"address": 39424, "count": 1, "type": "i16", "scale": 1, "unit": "%"},
-    
+
+    # Remote control and limits
+    "remote_control_flags": {"address": 46001, "count": 1, "type": "u16"},
+    "import_power_limit": {"address": 46501, "count": 2, "type": "i32", "unit": "W"},
+
 }
 
 # Sensor definitions for Home Assistant
@@ -299,5 +303,28 @@ SENSOR_DEFINITIONS = {
         "state_class": "total_increasing",
         "unit": "kWh",
         "icon": "mdi:battery-negative",
+    },
+}
+
+# Number definitions for writable setpoints
+NUMBER_DEFINITIONS = {
+    "import_power_limit": {
+        "name": "Import Power Limit",
+        "register": "import_power_limit",
+        "unit": "W",
+        "icon": "mdi:transmission-tower-import",
+        "min": 0,
+        "max": 50000,
+        "step": 100,
+    },
+}
+
+# Switch definitions for writable toggles
+SWITCH_DEFINITIONS = {
+    "remote_control_enable": {
+        "name": "Remote Control Enable",
+        "register": "remote_control_flags",
+        "bit": 0,
+        "icon": "mdi:remote",
     },
 }
