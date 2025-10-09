@@ -82,6 +82,20 @@ REGISTERS = {
     # Remote control and limits
     "remote_control_flags": {"address": 46001, "count": 1, "type": "u16"},
     "import_power_limit": {"address": 46501, "count": 2, "type": "i32", "unit": "W"},
+    "battery_max_charge_current": {
+        "address": 46607,
+        "count": 1,
+        "type": "i16",
+        "scale": 10,
+        "unit": "A",
+    },
+    "battery_max_discharge_current": {
+        "address": 46608,
+        "count": 1,
+        "type": "i16",
+        "scale": 10,
+        "unit": "A",
+    },
 
 }
 
@@ -316,6 +330,24 @@ NUMBER_DEFINITIONS = {
         "min": 0,
         "max": 50000,
         "step": 100,
+    },
+    "battery_max_charge_current": {
+        "name": "Battery Max Charge Current",
+        "register": "battery_max_charge_current",
+        "unit": "A",
+        "icon": "mdi:battery-arrow-up",
+        "min": 0,
+        "max": 50,
+        "step": 0.1,
+    },
+    "battery_max_discharge_current": {
+        "name": "Battery Max Discharge Current",
+        "register": "battery_max_discharge_current",
+        "unit": "A",
+        "icon": "mdi:battery-arrow-down",
+        "min": 0,
+        "max": 50,
+        "step": 0.1,
     },
 }
 

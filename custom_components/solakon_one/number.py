@@ -75,6 +75,7 @@ class SolakonNumber(CoordinatorEntity, NumberEntity):
         self._definition = definition
         self._register_key = definition["register"]
         self._register_config = REGISTERS[self._register_key]
+        self._scale = self._register_config.get("scale", 1)
         self._attr_unique_id = f"{config_entry.entry_id}_{number_key}"
         self.entity_id = f"number.solakon_one_{number_key}"
 
@@ -107,32 +108,38 @@ class SolakonNumber(CoordinatorEntity, NumberEntity):
 
     async def async_set_native_value(self, value: float) -> None:
         """Set a new value."""
-        step = self._attr_native_step or 1
-        int_value = int(round(value / step) * step)
+        step = self._attr_native_step
+        target_value = value
+        if step:
+            target_value = round(value / step) * step
 
         min_value = self._attr_native_min_value
         max_value = self._attr_native_max_value
-        if min_value is not None:
-            int_value = max(int_value, int(min_value))
-        if max_value is not None:
-            int_value = min(int_value, int(max_value))
+        if min_value is not None and target_value < min_value:
+            target_value = min_value
+        if max_value is not None and target_value > max_value:
+            target_value = max_value
+
+        scale = self._scale or 1
+        raw_value = target_value * scale if scale != 1 else target_value
+        raw_int = int(round(raw_value))
 
         address = self._register_config["address"]
         count = self._register_config.get("count", 1)
 
         if count == 1:
-            success = await self._hub.async_write_register(address, int_value)
+            success = await self._hub.async_write_register(address, raw_int & 0xFFFF)
         else:
-            registers = self._value_to_registers(int_value, count)
+            registers = self._value_to_registers(raw_int, count)
             success = await self._hub.async_write_registers(address, registers)
 
         if not success:
             raise HomeAssistantError(
-                f"Failed to write value {int_value} to register {address}"
+                f"Failed to write value {raw_int} to register {address}"
             )
 
         # Optimistically update and refresh
-        self.coordinator.data[self._register_key] = int_value
+        self.coordinator.data[self._register_key] = float(target_value)
         self.async_write_ha_state()
         await self.coordinator.async_request_refresh()
 

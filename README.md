@@ -54,6 +54,8 @@ A complete Home Assistant custom integration for Solakon ONE devices using Modbu
 ### Control Entities
 - Remote Control Enable (switch)
 - Import Power Limit (number)
+- Battery Max Charge Current (number)
+- Battery Max Discharge Current (number)
 
 ### System Information
 - Internal Temperature
